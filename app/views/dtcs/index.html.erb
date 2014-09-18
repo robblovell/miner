@@ -1,0 +1,36 @@
+<h1>Listing dtcs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+      <th>Meaning</th>
+      <th>Source</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dtcs.each do |dtc| %>
+      <tr>
+        <td><%= dtc.code %></td>
+        <td><%= dtc.description %></td>
+        <td><%= dtc.meaning %></td>
+        <td><%= dtc.system %></td>
+        <td><%= dtc.source %></td>
+        <th>Fitments</th>
+        <td><%= dtc.fitments.map {|c| c.make+c.year+c.model+c.engine}.join(', ') %></td>
+        <td><%= link_to 'Show', dtc %></td>
+        <td><%= link_to 'Edit', edit_dtc_path(dtc) %></td>
+        <td><%= link_to 'Destroy', dtc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dtc', new_dtc_path %>

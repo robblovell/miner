@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @dtc.code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @dtc.description %>
+</p>
+
+<p>
+  <strong>Meaning:</strong>
+  <%= @dtc.meaning %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @dtc.source %>
+</p>
+
+<p>
+  <strong>System:</strong>
+  <%= @dtc.system %>
+</p>
+
+<p>
+  <strong>Fitments:</strong>
+  <%= @dtc.fitments.map {|c|  c.make+c.year+c.model+c.engine}.join(', ') %>
+</p>
+
+<%= link_to 'Edit', edit_dtc_path(@dtc) %> |
+<%= link_to 'Back', dtcs_path %>

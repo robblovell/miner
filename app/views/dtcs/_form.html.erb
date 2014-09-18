@@ -1,0 +1,23 @@
+<%= simple_form_for @dtc do |f| %>
+  <% if @dtc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dtc.errors.count, "error") %> prohibited this dtc from being saved:</h2>
+
+      <ul>
+      <% @dtc.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.input :code %>
+    <%= f.input :description %>
+    <%= f.input :meaning %>
+    <%= f.input :source %>
+    <%= f.input :system %>
+    <%= f.association :fitments %>
+
+    <%= f.submit %>
+
+<% end %>

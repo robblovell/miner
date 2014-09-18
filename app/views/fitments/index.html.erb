@@ -1,0 +1,36 @@
+<h1>Listing fitments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Make</th>
+      <th>Year</th>
+      <th>Model</th>
+      <th>Engine</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fitments.each do |fitment| %>
+      <tr>
+        <td><%= fitment.make %></td>
+        <td><%= fitment.year %></td>
+        <td><%= fitment.model %></td>
+        <td><%= fitment.engine %></td>
+        <th>DTC's</th>
+        <td><%= fitment.dtcs.map {|c| c.code}.join(', ') %></td>
+
+        <td><%= link_to 'Show', fitment %></td>
+        <td><%= link_to 'Edit', edit_fitment_path(fitment) %></td>
+        <td><%= link_to 'Destroy', fitment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fitment', new_fitment_path %>

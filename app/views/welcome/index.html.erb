@@ -1,0 +1,17 @@
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+
+<%= button_to "New", { action: "new" }, form_class: "new-thing" %>
+<%= button_to "Create", { action: "create" }, remote: true, form: { "data-type" => "json" } %>
+
+<%= link_to 'My Blog', {controller: 'welcome', action: "create" } %>
+
+<%= form_tag(:controller => "welcome", :action => "calculate") do %>
+
+    <label for="q">Start Miner For http://www.actron.com/code_lookup.php:</label>
+    <input id="url" name="url" type="text" value="http://www.actron.com/code_lookup.php"/>
+
+    <%= submit_tag("Submit") %>
+<% end %>
+
+

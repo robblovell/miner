@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Make:</strong>
+  <%= @fitment.make %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @fitment.year %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @fitment.model %>
+</p>
+
+<p>
+  <strong>Engine:</strong>
+  <%= @fitment.engine %>
+</p>
+
+<p>
+  <strong>DTC Codes:</strong>
+  <%= @fitment.dtcs.map {|c| c.code}.join(', ') %>
+</p>
+
+<%= link_to 'Edit', edit_fitment_path(@fitment) %> |
+<%= link_to 'Back', fitments_path %>
