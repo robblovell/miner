@@ -1,13 +1,20 @@
 Miner::Application.routes.draw do
+  resources :indices
+
   post "welcome/new"
   post "welcome/create"
   get "welcome/create"
   post "welcome/calculate"
+  post "welcome/start"
+
   resources :dtcs
 
   resources :fitments
 
   root 'welcome#index'
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

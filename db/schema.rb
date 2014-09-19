@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917233316) do
+ActiveRecord::Schema.define(version: 20140919173245) do
 
   create_table "dtcs", force: true do |t|
     t.string   "code"
     t.string   "description"
     t.string   "meaning"
+    t.string   "system"
     t.string   "source"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -32,6 +33,20 @@ ActiveRecord::Schema.define(version: 20140917233316) do
     t.string   "year"
     t.string   "model"
     t.string   "engine"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "indices", force: true do |t|
+    t.integer  "miner"
+    t.string   "mode"
+    t.integer  "make"
+    t.integer  "year"
+    t.integer  "model"
+    t.integer  "engine"
+    t.integer  "system"
+    t.integer  "dtc"
+    t.boolean  "complete",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

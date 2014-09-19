@@ -1,0 +1,18 @@
+<%= simple_form_for(@index) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :miner %>
+    <%= f.input :mode %>
+    <%= f.input :make %>
+    <%= f.input :year %>
+    <%= f.input :model %>
+    <%= f.input :engine %>
+    <%= f.input :system %>
+    <%= f.input :dtc %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

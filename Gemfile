@@ -53,6 +53,9 @@ gem 'gherkin'
 gem 'cucumber'
 gem 'watir'
 gem 'watir-webdriver'
+gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', :require => nil
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

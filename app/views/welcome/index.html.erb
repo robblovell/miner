@@ -1,17 +1,21 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<h1>DTC Miner</h1>
 
+<!--
 <%= button_to "New", { action: "new" }, form_class: "new-thing" %>
 <%= button_to "Create", { action: "create" }, remote: true, form: { "data-type" => "json" } %>
 
 <%= link_to 'My Blog', {controller: 'welcome', action: "create" } %>
+-->
 
-<%= form_tag(:controller => "welcome", :action => "calculate") do %>
-
-    <label for="q">Start Miner For http://www.actron.com/code_lookup.php:</label>
-    <input id="url" name="url" type="text" value="http://www.actron.com/code_lookup.php"/>
-
+<%= form_tag(:controller => "welcome", :action => "start") do %>
+    <label for="q">Start Miner:</label><br/>
+    <label for="q">How many to start:</label>
+    <input id="miner" name="how_many" type="text" value="2"/><br/>
+    <label for="q">URI:</label>
+    <input id="url" name="url" type="text" value="http://www.actron.com/code_lookup.php"/><br/>
     <%= submit_tag("Submit") %>
+    <br/>
+    <%= link_to 'Monitoring', sidekiq_web_path %>
 <% end %>
 
 
