@@ -12,10 +12,11 @@
     <label for="q">How many to start:</label>
     <input id="miner" name="how_many" type="text" value="2"/><br/>
     <label for="q">URI:</label>
-    <input id="url" name="url" type="text" value="http://www.actron.com/code_lookup.php"/><br/>
-    <%= submit_tag("Submit") %>
-    <br/>
-    <%= link_to 'Monitoring', sidekiq_web_path %>
+    <input id="url" name="url" type="text" value="http://www.actron.com/code_lookup.php"/>
+    <br/><br/>
+    <%= submit_tag("Submit", :class => "btn btn-default btn-sm")%>
+    <br/><br/><br/>
+    <%= link_to 'Monitoring', sidekiq_web_path , :class=> "btn btn-default btn-sm"%>
 <% end %>
 
 

@@ -10,9 +10,10 @@ class ConsumeAcktron
     stopindex = Index.where({miner: params['miner'], mode: "last"})
     currentindex = Index.where({miner: params['miner'], mode: "current"})
 
+    currentindex = currentindex.first
     # set the starting location:
-    if (currentindex.index.first != nil )
-      start = currentindex.first
+    if (currentindex != nil && currentindex.make != nil )
+      start = currentindex
     else
       start = startindex.first
     end
@@ -59,16 +60,16 @@ class ConsumeAcktron
       dtc.fitments << fitment
       dtc.save
     end
-    index = Index.find_or_create_by({miner: id, mode:"current"})
-    index.attributes = {miner: id, mode:"current", make: index[0], year: index[1], model: index[2],
+    index_record = Index.find_or_create_by({miner: id, mode:"current"})
+    index_record.attributes = {miner: id, mode:"current", make: index[0], year: index[1], model: index[2],
                         engine: index[3], system: index[4], dtc: index[5]}
+    index_record.save
   end
 
   def consume_select(id, level, index, last, browser, select_name, field_name, application, params)
+
     _length = browser.select_list(:name => select_name[level]).options.count
-    if _length > 5
-      _length = 5
-    end
+
     if (level == field_name.length-1)  # bottom level
       codes = []
       for n in 1.._length-1 do
@@ -79,39 +80,68 @@ class ConsumeAcktron
           #puts "ix:"+n.to_s+" Application:"+application.to_s+"  Meaning:"+browser.bs[1].text;
           _record =  {app: application, dtc: {code: code, description: browser.bs[1].text, source: params['url'], system: application['system']}}
           codes << _record
+          index[level]+=1
           puts "ix:"+n.to_s+_record.to_s
+          if (n > 25)
+            save_dtcs(id, codes, index)
+            codes = []
+          end
         rescue Exception => e
           puts "ix:"+n.to_s+"  error:"+e.message
+          save_dtcs(id, codes, index)
+          codes = []
         end
       end
       save_dtcs(id, codes, index)
 
       return true
     elsif (level == 0) # top level
-      while index[level] < _length-1 && (index[level] <= last[level] || last[level]<=1) do  # ignore last if it's 1 or 0.
-        application[field_name[level]] = browser.select_list(:name => select_name[level]).options[index[level]].text
+      begin
+        while index[level] < _length-1 && (index[level] < last[level] || last[level]==0) do  # ignore last if it's 1 or 0.
+          application[field_name[level]] = browser.select_list(:name => select_name[level]).options[index[level]].text
 
-        browser.select_list(:name => select_name[level]).options[index[level]].select
-        level_below_finished = consume_select(id, level+1, index, last, browser, select_name, field_name, application, params)
-        if (level_below_finished)
-          index[level]+=1
+          browser.select_list(:name => select_name[level]).options[index[level]].select
+          level_below_finished = consume_select(id, level+1, index, last, browser, select_name, field_name, application, params)
+          if (level_below_finished)
+            index[level]+=1
+          end
+          browser.buttons[1].click # reset at level 0.
         end
-        browser.buttons[1].click # reset at level 0.
+        # mark complete.
+        for i in 0..index.count do
+          if (last[i]!= 0)
+            index[i] = last[i]
+          end
+        end
+      rescue Exception => e
+        puts "ix:"+n.to_s+"  error:"+e.message
+        exit
+      ensure
+        index_record = Index.find_or_create_by({miner: id, mode:"current"})
+        index_record.attributes = {miner: id, mode:"current", make: index[0], year: index[1], model: index[2],
+                                   engine: index[3], system: index[4], dtc: index[5]}
+        index_record.save
       end
     else
-      puts "level:"+level.to_s+" index:"+index[level].to_s+"  length:"+_length.to_s
-      application[field_name[level]] = browser.select_list(:name => select_name[level]).options[index[level]].text
-      browser.select_list(:name => select_name[level]).options[index[level]].select
-      level_below_finished = consume_select(id, level+1, index, last, browser, select_name, field_name, application, params)
+      begin
+        puts "level:"+level.to_s+" index:"+index[level].to_s+"  length:"+_length.to_s
+        application[field_name[level]] = browser.select_list(:name => select_name[level]).options[index[level]].text
+        browser.select_list(:name => select_name[level]).options[index[level]].select
+        level_below_finished = consume_select(id, level+1, index, last, browser, select_name, field_name, application, params)
 
-      if (level_below_finished)
-        index[level]+=1
-        index[level+1]=1
+        if (level_below_finished)
+          index[level]+=1
+          index[level+1]=1
 
+        end
+      rescue Exception => e
+        puts "ix:"+n.to_s+"  error:"+e.message
+        exit
       end
 
-      return index[level] == _length || (index[level] == last[level] && last[level] > 1) # 0 or 1 for last means do the whole level.
+      return index[level] == _length || (index[level] == last[level] && last[level] != 0) # 0 or 1 for last means do the whole level.
     end
+
   end
 
   def fitment_params
