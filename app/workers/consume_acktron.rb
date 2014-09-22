@@ -39,12 +39,16 @@ class ConsumeAcktron
     codes = []
     id = start.miner
 
+    require 'watir-webdriver'
+    require 'headless'
+    headless = Headless.new
+    headless.start
     Watir.always_locate=false
     browser = Watir::Browser.new
     browser.goto params['url']
 
     consume_select(id, 0, index, last, browser, select_name, field_name, application, params) # start and selector 0, option #1
-
+    headless.destroy
   end
 
 
