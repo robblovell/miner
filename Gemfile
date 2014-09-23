@@ -57,6 +57,7 @@ gem 'watir-webdriver'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'headless'
+#gem 'libv8', '3.16.14.7'
 gem 'activerecord-mysql2-retry-ext'
 
 # Use ActiveModel has_secure_password

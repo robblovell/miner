@@ -55,6 +55,7 @@ class ConsumeAcktron
 
   def save_dtcs(id, codes, index)
     for code in codes do
+      system = code[:app]['system']
       code[:app].delete('system')
 
       fitment = Fitment.find_or_create_by(code[:app])
@@ -62,6 +63,7 @@ class ConsumeAcktron
       fitment.save
       dtc = Dtc.find_or_create_by(code[:dtc])
       dtc.attributes = code[:dtc]
+      dtc.system = system
       dtc.fitments << fitment
       dtc.save
     end
