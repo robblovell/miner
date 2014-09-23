@@ -33,7 +33,7 @@
       <file leaf-file-name="consume_acktron.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/workers/consume_acktron.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="33" selection-start="4999" selection-end="4999" vertical-scroll-proportion="0.61692125" vertical-offset="1560" max-vertical-offset="2505">
+            <state line="112" column="35" selection-start="3833" selection-end="3833" vertical-scroll-proportion="0.59929496" vertical-offset="1170" max-vertical-offset="2520">
               <folding />
             </state>
           </provider>
@@ -981,7 +981,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/workers/consume_acktron.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="33" selection-start="4999" selection-end="4999" vertical-scroll-proportion="0.61692125" vertical-offset="1560" max-vertical-offset="2505">
+        <state line="112" column="35" selection-start="3833" selection-end="3833" vertical-scroll-proportion="0.59929496" vertical-offset="1170" max-vertical-offset="2520">
           <folding />
         </state>
       </provider>

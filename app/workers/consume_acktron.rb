@@ -93,7 +93,7 @@ class ConsumeAcktron
           end
         rescue Exception => e
           puts "ix:"+n.to_s+"  error:"+e.message
-          raise "Error at leaf: ix:"+n.to_s+" index:"+index.to_s+" error:"+e.message
+          raise "\nError at leaf: ix:"+n.to_s+" index:"+index.to_s+"\n   error:"+e.message+ "\n   stack:"+e.backtrace.join("\n")
         ensure
           save_dtcs(id, codes, index)
           codes = []
@@ -123,7 +123,8 @@ class ConsumeAcktron
         end
       rescue Exception => e
         puts "ix:"+n.to_s+"  error:"+e.message
-        raise "Error at top level: ix:"+n.to_s+" index:"+index.to_s+" error:"+e.message
+        raise "\nError at top level: ix:"+n.to_s+" index:"+index.to_s+"\n   error:"+e.message+ "\n   stack:"+e.backtrace.join("\n")
+
       ensure
         index_record = Index.find_or_create_by({miner: id, mode:"current"})
         index_record.attributes = {miner: id, mode:"current", make: index[0], year: index[1], model: index[2],
@@ -143,7 +144,7 @@ class ConsumeAcktron
         end
       rescue Exception => e
         puts "ix:"+n.to_s+"  error:"+e.message
-        raise "Error at middle level: ix:"+n.to_s+" index:"+index.to_s+" error:"+e.message
+        raise "\nError at middle level: ix:"+n.to_s+" index:"+index.to_s+"\n   error:"+e.message+ "\n   stack:"+e.backtrace.join("\n")
       end
       return index[level] == _length || (index[level] == last[level] && last[level] != 0) # 0 or 1 for last means do the whole level.
     end
