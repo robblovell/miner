@@ -42,7 +42,7 @@
       <file leaf-file-name="sidekiq.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/sidekiq.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="0" selection-start="124" selection-end="124" vertical-scroll-proportion="0.2112676" vertical-offset="0" max-vertical-offset="568">
+            <state line="5" column="9" selection-start="98" selection-end="98" vertical-scroll-proportion="0.13204226" vertical-offset="0" max-vertical-offset="568">
               <folding />
             </state>
           </provider>
@@ -981,7 +981,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/sidekiq.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="124" selection-end="124" vertical-scroll-proportion="0.2112676" vertical-offset="0" max-vertical-offset="568">
+        <state line="5" column="9" selection-start="98" selection-end="98" vertical-scroll-proportion="0.13204226" vertical-offset="0" max-vertical-offset="568">
           <folding />
         </state>
       </provider>
