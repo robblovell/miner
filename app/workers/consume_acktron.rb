@@ -87,15 +87,18 @@ class ConsumeAcktron
           codes << _record
           index[level]+=1
           puts "ix:"+n.to_s+_record.to_s
-          if (n > 25)
+          if (n%50 == 0)
             save_dtcs(id, codes, index)
             codes = []
           end
         rescue Exception => e
           puts "ix:"+n.to_s+"  error:"+e.message
+          raise "Error at leaf: ix:"+n.to_s+" index:"+index.to_s+" error:"+e.message
+        ensure
           save_dtcs(id, codes, index)
           codes = []
         end
+
       end
       save_dtcs(id, codes, index)
 
@@ -120,7 +123,7 @@ class ConsumeAcktron
         end
       rescue Exception => e
         puts "ix:"+n.to_s+"  error:"+e.message
-        exit
+        raise "Error at top level: ix:"+n.to_s+" index:"+index.to_s+" error:"+e.message
       ensure
         index_record = Index.find_or_create_by({miner: id, mode:"current"})
         index_record.attributes = {miner: id, mode:"current", make: index[0], year: index[1], model: index[2],
@@ -128,6 +131,7 @@ class ConsumeAcktron
         index_record.save
       end
     else
+      begin
         puts "level:"+level.to_s+" index:"+index[level].to_s+"  length:"+_length.to_s
         application[field_name[level]] = browser.select_list(:name => select_name[level]).options[index[level]].text
         browser.select_list(:name => select_name[level]).options[index[level]].select
@@ -136,11 +140,13 @@ class ConsumeAcktron
         if (level_below_finished)
           index[level]+=1
           index[level+1]=1
-
         end
+      rescue Exception => e
+        puts "ix:"+n.to_s+"  error:"+e.message
+        raise "Error at middle level: ix:"+n.to_s+" index:"+index.to_s+" error:"+e.message
+      end
       return index[level] == _length || (index[level] == last[level] && last[level] != 0) # 0 or 1 for last means do the whole level.
     end
-
   end
 
   def fitment_params
