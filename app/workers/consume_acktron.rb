@@ -1,10 +1,9 @@
 # app/workers/hard_worker.rb
+
 class ConsumeAcktron
   include Sidekiq::Worker
 
   def perform(params)
-    ActiveRecord::Base.reset_active_connections!
-
     select_name = ['vin_make','vin_year','vin_model','vin_engine','vin_special','vin_error']
     field_name = ['make','year','model','engine','system', 'code']
 

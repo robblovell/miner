@@ -27,6 +27,9 @@ GEM
       activesupport (= 4.0.10)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activerecord-mysql2-retry-ext (0.2.0)
+      activerecord (>= 3.1.0)
+      mysql2 (~> 0.3)
     activesupport (4.0.10)
       i18n (~> 0.6, >= 0.6.9)
       minitest (~> 4.2)
@@ -196,6 +199,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-mysql2-retry-ext
   coffee-rails (~> 4.0.0)
   cucumber
   execjs
