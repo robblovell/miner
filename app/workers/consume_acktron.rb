@@ -3,6 +3,8 @@ class ConsumeAcktron
   include Sidekiq::Worker
 
   def perform(params)
+    ActiveRecord::Base.reset_active_connections!
+
     select_name = ['vin_make','vin_year','vin_model','vin_engine','vin_special','vin_error']
     field_name = ['make','year','model','engine','system', 'code']
 
@@ -127,7 +129,6 @@ class ConsumeAcktron
         index_record.save
       end
     else
-      begin
         puts "level:"+level.to_s+" index:"+index[level].to_s+"  length:"+_length.to_s
         application[field_name[level]] = browser.select_list(:name => select_name[level]).options[index[level]].text
         browser.select_list(:name => select_name[level]).options[index[level]].select
@@ -138,11 +139,6 @@ class ConsumeAcktron
           index[level+1]=1
 
         end
-      rescue Exception => e
-        puts "ix:"+n.to_s+"  error:"+e.message
-        exit
-      end
-
       return index[level] == _length || (index[level] == last[level] && last[level] != 0) # 0 or 1 for last means do the whole level.
     end
 
