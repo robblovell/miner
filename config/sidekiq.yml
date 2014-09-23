@@ -2,7 +2,7 @@
 :verbose: false
 :pidfile: ./tmp/pids/sidekiq.pid
 :namespace: sidekiq
-:concurrency: 20
-:pool: 20
+:concurrency: 5
+:pool: 5
 :queues:
   - [default, 5]
