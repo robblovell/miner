@@ -59,6 +59,7 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'headless'
 #gem 'libv8', '3.16.14.7'
 gem 'activerecord-mysql2-retry-ext'
+gem 'god'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

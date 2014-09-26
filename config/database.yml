@@ -30,10 +30,10 @@ test:
   socket: /tmp/mysql.sock
 
 production:
+  host: 54.210.187.172
   adapter: mysql2
   encoding: utf8
   database: miner_production
   pool: 400
-  username: root
+  username: admin
   password: 13monsters
-  socket: /var/lib/mysql/mysql.sock

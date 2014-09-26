@@ -1,7 +1,6 @@
 ---
 :verbose: false
 :pidfile: ./tmp/pids/sidekiq.pid
-:namespace: sidekiq
 :concurrency: 5
 :pool: 10
 :queues:
