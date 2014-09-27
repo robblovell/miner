@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1057272251">
+    <data-source source="LOCAL" name="Rails miner: production" uuid="370f510d-c0e7-4218-847b-615a16255745">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://54.210.187.172/miner_production</jdbc-url>
+      <user-name>admin</user-name>
+      <user-password>df9bdf99dfc7dfc5dfc4dfd9dfdedfcfdfd8dfd9</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

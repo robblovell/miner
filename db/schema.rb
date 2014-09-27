@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919173245) do
+ActiveRecord::Schema.define(version: 20140926232005) do
+
+  create_table "capstones", force: true do |t|
+    t.integer  "index"
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "dtcs", force: true do |t|
     t.string   "code"

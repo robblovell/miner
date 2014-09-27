@@ -20,17 +20,29 @@ class WelcomeController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def do_next?(id, number, index)
+    return (id % number != index % number)
+  end
+
   def start
     number_to_start = params['how_many'].to_i
-
+    capstone = Capstone.first()
+    capstone.index+=1
+    capstone.save
+    capstone.index-=1
     number_started = 0
     start_make = 1 # assume up to 44 makes.
     start_year = 1 # assume 14 years max.
+
+
     Index.find_each(:conditions => "mode='start'") do |index|
       current = Index.first(:conditions => "mode='current' and miner=#{index.miner}")
       last = Index.first(:conditions => "mode='last' and miner=#{index.miner}")
       start_make = last.make
       start_year = last.year
+      if (do_next?(current.id, capstone.number, capstone.index)) # skip over ones that this machine doesn't do.
+        next
+      end
       if (current.make == last.make && current.year == last.year) # done.
         next
       else # start a process.
@@ -59,6 +71,9 @@ class WelcomeController < ApplicationController
       end
 
       miner+=1
+      if (do_next?(miner, capstone.number, capstone.index)) # skip over ones that this machine doesn't do.
+        next
+      end
       Index.create({miner: miner, mode: 'start', make: start_make, year: start_year, model: 1, engine: 1, system: 1, dtc: 1, complete: false})
       Index.create({miner: miner, mode: 'current', make: start_make, year: start_year, model: 1, engine: 1, system: 1, dtc: 1, complete: false})
       Index.create({miner: miner, mode: 'last', make: start_make+1, year: start_year+1, model: 0, engine: 0, system: 0, dtc: 0, complete: false})

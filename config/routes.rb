@@ -1,4 +1,6 @@
 Miner::Application.routes.draw do
+  resources :capstones
+
   resources :indices
 
   post "welcome/new"
