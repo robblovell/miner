@@ -42,7 +42,7 @@ class ConsumeAcktron
 
     require 'watir-webdriver'
     require 'headless'
-    #Selenium::WebDriver::Firefox::Binary.path='/usr/local/bin/firefox'
+    Selenium::WebDriver::Firefox::Binary.path='/usr/local/bin/firefox'
     headless = Headless.new
     headless.start
     Watir.always_locate=false
